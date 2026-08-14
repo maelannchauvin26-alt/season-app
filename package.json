@@ -1,0 +1,9 @@
+{
+  "name": "season-app",
+  "version": "1.0.0",
+  "description": "Application Season",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
