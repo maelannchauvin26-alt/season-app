@@ -767,18 +767,25 @@ const saveCoachObjectiveFeedback = async () => {
     try {
       if (mode === "signup") {
         const {
-          data,
-          error,
-        } = await supabase.auth.signUp({
-          email: email.trim(),
-          password,
-          options: {
-            data: {
-              role: role || "athlete",
-            },
-          },
-        });
-
+  data,
+  error,
+} = await supabase.auth.signUp({
+  email: email.trim(),
+  password,
+  options: {
+    data: {
+      role: role || "athlete",
+      first_name:
+        role === "coach"
+          ? coachFirstName.trim()
+          : null,
+      last_name:
+        role === "coach"
+          ? coachLastName.trim()
+          : null,
+    },
+  },
+});
         if (error) {
           throw error;
         }
@@ -790,16 +797,24 @@ const saveCoachObjectiveFeedback = async () => {
         }
 
         const { error: profileError } =
-          await supabase.from("profiles").upsert(
-            {
-              id: data.user.id,
-              email: email.trim(),
-              role: role || "athlete",
-            },
-            {
-              onConflict: "id",
-            }
-          );
+  await supabase.from("profiles").upsert(
+    {
+      id: data.user.id,
+      email: email.trim(),
+      role: role || "athlete",
+      first_name:
+        role === "coach"
+          ? coachFirstName.trim()
+          : null,
+      last_name:
+        role === "coach"
+          ? coachLastName.trim()
+          : null,
+    },
+    {
+      onConflict: "id",
+    }
+  );
 
         if (profileError) {
           console.error(profileError);
@@ -812,19 +827,25 @@ const saveCoachObjectiveFeedback = async () => {
         setRole(role || data.user.user_metadata?.role || "athlete");
 
         const newProfile = {
-          id: data.user.id,
-          email: email.trim(),
-          role: role || "athlete",
-        };
+  id: data.user.id,
+  email: email.trim(),
+  role: role || "athlete",
+  first_name:
+    role === "coach"
+      ? coachFirstName.trim()
+      : null,
+  last_name:
+    role === "coach"
+      ? coachLastName.trim()
+      : null,
+};
 
         setProfile(newProfile);
 
         if (role === "coach") {
-          setCoachFirstName("");
-          setCoachLastName("");
-          setCoachTab("overview");
-          setMode("dashboard");
-        } else {
+  setCoachTab("overview");
+  setMode("dashboard");
+} else {
           setAthleteProfileTab("profile");
           setMode("dashboard");
         }
@@ -1103,15 +1124,31 @@ const saveCoachObjectiveFeedback = async () => {
         club: club.trim(),
       };
 
-      const { error } = await supabase
-        .from("athlete_data")
-        .upsert(payload, {
-          onConflict: "user_id",
-        });
+      const { error: athleteDataError } = await supabase
+  .from("athlete_data")
+  .upsert(payload, {
+    onConflict: "user_id",
+  });
 
-      if (error) {
-        throw error;
-      }
+if (athleteDataError) {
+  throw athleteDataError;
+}
+
+const { data: updatedProfile, error: profileError } = await supabase
+  .from("profiles")
+  .update({
+    first_name: firstName.trim(),
+    last_name: lastName.trim(),
+  })
+  .eq("id", user.id)
+  .select("id, first_name, last_name")
+  .single();
+
+if (profileError) {
+  throw profileError;
+}
+
+console.log("Profil utilisateur synchronisé :", updatedProfile);
 
       setAthleteData({
         first_name: firstName.trim(),
@@ -1122,9 +1159,11 @@ const saveCoachObjectiveFeedback = async () => {
         club: club.trim(),
       });
 
-      setMessage(
-        "Profil enregistré avec succès."
-      );
+      setMessage("Profil enregistré avec succès.");
+
+setTimeout(() => {
+  setMessage("");
+}, 3000);
     } catch (error) {
       console.error(error);
 
@@ -4562,7 +4601,63 @@ if (objectivesError) {
   }
 
   return (
-    <div className="auth-page"><div className="auth-card"><button type="button" className="back-button" onClick={backHome}>← Retour</button><div className="auth-logo">SEASON</div><p className="eyebrow">{mode === "signup" ? "CRÉER UN COMPTE" : "BIENVENUE"}</p><h1>{mode === "signup" ? "Créer ton compte." : "Content de te revoir."}</h1>{mode === "signup" && role && <div className="role-badge">{role === "athlete" ? "Compte Athlète" : "Compte Entraîneur"}</div>}<form onSubmit={handleAuth}><label>Adresse e-mail</label><input type="email" placeholder="ton@email.com" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" required /><label>Mot de passe</label><input type="password" placeholder="Ton mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required /><button className="primary-button auth-submit" type="submit" disabled={loading}>{loading ? "Chargement..." : mode === "signup" ? "Créer mon compte" : "Se connecter"}</button></form>{mode === "login" && <button type="button" className="outline-button" style={{ width: "100%", marginTop: "12px" }} onClick={() => { setResetEmail(email); setResetMessage(""); setMode("forgot"); }}>Mot de passe oublié ?</button>}{message && <div className={message.startsWith("Erreur") ? "auth-message" : "success-message"}>{message}</div>}<div className="auth-switch">{mode === "signup" ? <>Tu as déjà un compte ? <button type="button" onClick={() => { setMode("login"); setMessage(""); }}>Se connecter</button></> : <>Tu n'as pas encore de compte ? <button type="button" onClick={() => { setMode("signup"); setMessage(""); }}>Créer un compte</button></>}</div></div></div>
+    <div className="auth-page"><div className="auth-card"><button type="button" className="back-button" onClick={backHome}>← Retour</button><div className="auth-logo">SEASON</div><p className="eyebrow">{mode === "signup" ? "CRÉER UN COMPTE" : "BIENVENUE"}</p><h1>{mode === "signup" ? "Créer ton compte." : "Content de te revoir."}</h1>{mode === "signup" && role && <div className="role-badge">{role === "athlete" ? "Compte Athlète" : "Compte Entraîneur"}</div>}<form onSubmit={handleAuth}>
+  {mode === "signup" && role === "coach" && (
+    <>
+      <label>Prénom</label>
+      <input
+        type="text"
+        placeholder="Ton prénom"
+        value={coachFirstName}
+        onChange={(e) => setCoachFirstName(e.target.value)}
+        autoComplete="given-name"
+        required
+      />
+
+      <label>Nom</label>
+      <input
+        type="text"
+        placeholder="Ton nom"
+        value={coachLastName}
+        onChange={(e) => setCoachLastName(e.target.value)}
+        autoComplete="family-name"
+        required
+      />
+    </>
+  )}
+
+  <label>Adresse e-mail</label>
+  <input
+    type="email"
+    placeholder="ton@email.com"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    autoComplete="email"
+    required
+  />
+
+  <label>Mot de passe</label>
+  <input
+    type="password"
+    placeholder="Ton mot de passe"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    autoComplete="new-password"
+    required
+  />
+
+  <button
+    className="primary-button auth-submit"
+    type="submit"
+    disabled={loading}
+  >
+    {loading
+      ? "Chargement..."
+      : mode === "signup"
+      ? "Créer mon compte"
+      : "Se connecter"}
+  </button>
+</form>{mode === "login" && <button type="button" className="outline-button" style={{ width: "100%", marginTop: "12px" }} onClick={() => { setResetEmail(email); setResetMessage(""); setMode("forgot"); }}>Mot de passe oublié ?</button>}{message && <div className={message.startsWith("Erreur") ? "auth-message" : "success-message"}>{message}</div>}<div className="auth-switch">{mode === "signup" ? <>Tu as déjà un compte ? <button type="button" onClick={() => { setMode("login"); setMessage(""); }}>Se connecter</button></> : <>Tu n'as pas encore de compte ? <button type="button" onClick={() => { setMode("signup"); setMessage(""); }}>Créer un compte</button></>}</div></div></div>
   );
 }
 
