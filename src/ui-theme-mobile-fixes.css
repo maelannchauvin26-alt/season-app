@@ -1,0 +1,138 @@
+/* Season — mobile + dark-mode safety layer */
+html, body, #root { max-width: 100%; overflow-x: hidden; }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --black: #f5f5f2;
+    --black-soft: #e8e8e3;
+    --white: #151514;
+    --background: #111210;
+    --surface: #1a1b18;
+    --surface-soft: #22231f;
+    --border: #353630;
+    --border-soft: #2b2c28;
+    --text: #f3f3ee;
+    --muted: #b4b5ad;
+    --muted-light: #92938b;
+    --lime: #c8ff4d;
+    --lime-dark: #c8ff4d;
+    --lime-soft: #27321f;
+    --danger: #ff7777;
+    --danger-soft: #3a2020;
+    --success: #c8ef78;
+    --success-soft: #26321a;
+  }
+
+  body, .dashboard, .auth-page, .landing-page, .loading-screen {
+    background-color: var(--background);
+    color: var(--text);
+  }
+
+  .dashboard-header, .auth-card, .main-card, .info-card, .recent-card,
+  .quote-card, .season-list, .profile-form, .profile-card,
+  .profile-identity, .competition-card, .bilan-card,
+  .coach-athlete-panel, .floating-card, .modal-card {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  input, textarea, select,
+  .auth-card input, .profile-form input, .profile-card input,
+  .profile-form textarea, .profile-card textarea, .profile-form select {
+    background: var(--surface-soft);
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--muted-light); }
+
+  .description, .landing-content p, .landing-label, .section-label,
+  .eyebrow, .card-label, .text-muted, .warning, .landing-footer,
+  .dashboard-footer, .floating-card span, .floating-card small { color: var(--muted); }
+
+  .login-button, .secondary-button, .outline-button {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .auth-message { background: var(--surface-soft); color: var(--text); }
+  .success-message { background: var(--success-soft); color: var(--success); }
+}
+
+.main-nav, .profile-tabs, .coach-tabs, .athlete-profile-tabs {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.main-nav button, .profile-tabs button, .coach-tabs button,
+.athlete-profile-tabs button {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+img, svg, video, canvas { max-width: 100%; }
+
+@media (max-width: 650px) {
+  .dashboard-header {
+    padding: 10px 12px;
+    min-height: 70px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .main-nav {
+    order: 3;
+    width: 100%;
+    flex: 0 0 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 2px 0 4px;
+  }
+
+  .main-nav::-webkit-scrollbar { display: none; }
+  .main-nav button {
+    flex: 0 0 auto;
+    white-space: nowrap !important;
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+
+  .page-heading, .section-heading, .competition-card-header,
+  .coach-athlete-header, .question-top, .form-row, .dashboard-grid,
+  .bottom-grid, .coach-overview-grid, .competition-row { min-width: 0; }
+
+  .competition-row > div { min-width: 0 !important; max-width: 100%; }
+  .competition-row h3, .competition-row p,
+  .page-heading h1, .welcome-section h1 { overflow-wrap: anywhere; }
+
+  .profile-tabs {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .profile-tabs::-webkit-scrollbar { display: none; }
+  .profile-tabs button { flex: 0 0 auto; white-space: nowrap; }
+
+  .primary-button, .secondary-button, .outline-button,
+  .large-submit, .logout-button {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 420px) {
+  .main-nav button { padding: 8px 9px; font-size: 11px; }
+  .page-heading h1, .welcome-section h1 { font-size: 34px; }
+}
