@@ -2,8 +2,8 @@ name: Apply UI fixes on master
 
 on:
   push:
-    paths:
-      - ".ui-fix-trigger"
+    branches:
+      - master
 
 permissions:
   contents: write
@@ -22,17 +22,14 @@ jobs:
           app = Path('src/App.jsx')
           css = Path('src/App.css')
 
-          # Add a small system-theme synchronizer to App.jsx if not already present.
           text = app.read_text(encoding='utf-8')
-          marker = '  // =====================================================\n  // INITIALISATION\n  // =====================================================\n'
-          effect = '''  // =====================================================\n  // SYNCHRONISATION DU THÈME SYSTÈME\n  // =====================================================\n\n  useEffect(() => {\n    const media = window.matchMedia("(prefers-color-scheme: dark)");\n\n    const syncTheme = () => {\n      document.documentElement.dataset.theme = media.matches ? "dark" : "light";\n    };\n\n    syncTheme();\n    media.addEventListener?.("change", syncTheme);\n\n    return () => media.removeEventListener?.("change", syncTheme);\n  }, []);\n\n'''
           if 'SYNCHRONISATION DU THÈME SYSTÈME' not in text:
+              marker = '  // =====================================================\n  // INITIALISATION\n  // =====================================================\n'
+              effect = '''  // =====================================================\n  // SYNCHRONISATION DU THÈME SYSTÈME\n  // =====================================================\n\n  useEffect(() => {\n    const media = window.matchMedia("(prefers-color-scheme: dark)");\n\n    const syncTheme = () => {\n      document.documentElement.dataset.theme = media.matches ? "dark" : "light";\n    };\n\n    syncTheme();\n    media.addEventListener?.("change", syncTheme);\n\n    return () => media.removeEventListener?.("change", syncTheme);\n  }, []);\n\n'''
               if marker not in text:
                   raise SystemExit('INITIALISATION marker not found in App.jsx')
-              text = text.replace(marker, effect + marker, 1)
-              app.write_text(text, encoding='utf-8')
+              app.write_text(text.replace(marker, effect + marker, 1), encoding='utf-8')
 
-          # Append an override layer to the existing CSS; this preserves the existing design.
           css_text = css.read_text(encoding='utf-8')
           if 'UI FIXES — THÈME SYSTÈME + MOBILE' not in css_text:
               fixes = r'''
@@ -43,10 +40,7 @@ jobs:
 
 html,
 body,
-#root {
-  max-width: 100%;
-  overflow-x: hidden;
-}
+#root { max-width: 100%; overflow-x: hidden; }
 
 html { color-scheme: light; }
 html[data-theme="light"] { color-scheme: light; }
@@ -89,7 +83,7 @@ html[data-theme="dark"] {
     --muted-light: #92938b;
     --lime: #c8ff4d;
     --lime-dark: #c8ff4d;
-    --lime-soft: #27321a;
+    --lime-soft: #27321f;
     --danger: #ff7777;
     --danger-soft: #3a2020;
     --success: #c8ef78;
@@ -141,14 +135,8 @@ html[data-theme="dark"] .profile-form select {
 }
 
 html[data-theme="dark"] input::placeholder,
-html[data-theme="dark"] textarea::placeholder {
-  color: var(--muted-light);
-}
+html[data-theme="dark"] textarea::placeholder { color: var(--muted-light); }
 
-html[data-theme="dark"] .main-nav button,
-html[data-theme="dark"] .profile-tabs button,
-html[data-theme="dark"] .back-button,
-html[data-theme="dark"] .auth-switch,
 html[data-theme="dark"] .description,
 html[data-theme="dark"] .landing-content p,
 html[data-theme="dark"] .landing-label,
@@ -160,9 +148,7 @@ html[data-theme="dark"] .warning,
 html[data-theme="dark"] .landing-footer,
 html[data-theme="dark"] .dashboard-footer,
 html[data-theme="dark"] .floating-card span,
-html[data-theme="dark"] .floating-card small {
-  color: var(--muted);
-}
+html[data-theme="dark"] .floating-card small { color: var(--muted); }
 
 html[data-theme="dark"] .login-button,
 html[data-theme="dark"] .secondary-button,
@@ -185,10 +171,7 @@ html[data-theme="dark"] .success-message {
 .main-nav,
 .profile-tabs,
 .coach-tabs,
-.athlete-profile-tabs {
-  min-width: 0;
-  max-width: 100%;
-}
+.athlete-profile-tabs { min-width: 0; max-width: 100%; }
 
 .main-nav button,
 .profile-tabs button,
@@ -210,10 +193,7 @@ h4,
 h5,
 h6,
 label,
-strong {
-  max-width: 100%;
-  overflow-wrap: anywhere;
-}
+strong { max-width: 100%; overflow-wrap: anywhere; }
 
 img,
 svg,
@@ -228,10 +208,7 @@ canvas { max-width: 100%; }
     flex-wrap: wrap;
   }
 
-  .dashboard-header .brand {
-    min-width: 0;
-    flex: 0 0 auto;
-  }
+  .dashboard-header .brand { min-width: 0; flex: 0 0 auto; }
 
   .main-nav {
     order: 3;
@@ -263,21 +240,13 @@ canvas { max-width: 100%; }
   .dashboard-grid,
   .bottom-grid,
   .coach-overview-grid,
-  .competition-row {
-    min-width: 0;
-  }
+  .competition-row { min-width: 0; }
 
-  .competition-row > div {
-    min-width: 0 !important;
-    max-width: 100%;
-  }
-
+  .competition-row > div { min-width: 0 !important; max-width: 100%; }
   .competition-row h3,
   .competition-row p,
   .page-heading h1,
-  .welcome-section h1 {
-    overflow-wrap: anywhere;
-  }
+  .welcome-section h1 { overflow-wrap: anywhere; }
 
   .profile-tabs {
     display: flex;
@@ -289,11 +258,7 @@ canvas { max-width: 100%; }
   }
 
   .profile-tabs::-webkit-scrollbar { display: none; }
-
-  .profile-tabs button {
-    flex: 0 0 auto;
-    white-space: nowrap;
-  }
+  .profile-tabs button { flex: 0 0 auto; white-space: nowrap; }
 
   .large-submit,
   .primary-button,
@@ -307,14 +272,9 @@ canvas { max-width: 100%; }
 }
 
 @media (max-width: 420px) {
-  .main-nav button {
-    padding: 8px 9px;
-    font-size: 11px;
-  }
-
+  .main-nav button { padding: 8px 9px; font-size: 11px; }
   .page-heading h1,
   .welcome-section h1 { font-size: 34px; }
-
   .main-card,
   .info-card,
   .recent-card,
@@ -324,19 +284,20 @@ canvas { max-width: 100%; }
   .profile-identity,
   .competition-card,
   .bilan-card,
-  .coach-athlete-panel {
-    padding: 17px;
-  }
+  .coach-athlete-panel { padding: 17px; }
 }
 '''
               css.write_text(css_text.rstrip() + fixes + '\n', encoding='utf-8')
           PY
 
-      - name: Remove temporary trigger and workflow, commit changes
+      - name: Commit UI changes if needed
         run: |
-          rm -f .ui-fix-trigger .github/workflows/apply-ui-fixes-master.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/App.jsx src/App.css .ui-fix-trigger .github/workflows/apply-ui-fixes-master.yml
+          git add src/App.jsx src/App.css
+          if git diff --cached --quiet; then
+            echo "No UI changes to commit."
+            exit 0
+          fi
           git commit -m "fix: improve mobile layout and dark mode"
           git push
