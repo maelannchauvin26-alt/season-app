@@ -25,41 +25,184 @@ html, body, #root { max-width: 100%; overflow-x: hidden; }
   }
 
   body, .dashboard, .auth-page, .landing-page, .loading-screen {
-    background-color: var(--background);
+    background-color: var(--background) !important;
+    color: var(--text) !important;
+  }
+
+  /* Global text correction: catches hard-coded black/grey text left in App.css. */
+  .dashboard p,
+  .dashboard h1,
+  .dashboard h2,
+  .dashboard h3,
+  .dashboard h4,
+  .dashboard h5,
+  .dashboard h6,
+  .dashboard label,
+  .dashboard li,
+  .dashboard strong,
+  .dashboard span,
+  .dashboard small,
+  .dashboard div,
+  .auth-page p,
+  .auth-page h1,
+  .auth-page h2,
+  .auth-page h3,
+  .auth-page label,
+  .auth-page span,
+  .landing-page p,
+  .landing-page h1,
+  .landing-page h2,
+  .landing-page h3,
+  .landing-page label,
+  .landing-page span,
+  .loading-screen {
     color: var(--text);
   }
 
-  .dashboard-header, .auth-card, .main-card, .info-card, .recent-card,
-  .quote-card, .season-list, .profile-form, .profile-card,
-  .profile-identity, .competition-card, .bilan-card,
-  .coach-athlete-panel, .floating-card, .modal-card {
-    background: var(--surface);
-    color: var(--text);
-    border-color: var(--border);
+  /* Secondary text stays softer, but remains readable. */
+  .text-muted,
+  .description,
+  .landing-content p,
+  .landing-label,
+  .section-label,
+  .eyebrow,
+  .card-label,
+  .warning,
+  .landing-footer,
+  .dashboard-footer,
+  .floating-card span,
+  .floating-card small,
+  .auth-switch,
+  .back-button {
+    color: var(--muted) !important;
   }
 
-  input, textarea, select,
-  .auth-card input, .profile-form input, .profile-card input,
-  .profile-form textarea, .profile-card textarea, .profile-form select {
-    background: var(--surface-soft);
-    color: var(--text);
-    border-color: var(--border);
+  .success { color: var(--success) !important; }
+  .error { color: var(--danger) !important; }
+  .warning { color: #e6c56a !important; }
+
+  .dashboard-header,
+  .auth-card,
+  .main-card,
+  .info-card,
+  .recent-card,
+  .quote-card,
+  .season-list,
+  .profile-form,
+  .profile-card,
+  .profile-identity,
+  .competition-card,
+  .bilan-card,
+  .coach-athlete-panel,
+  .floating-card,
+  .modal-card,
+  .surface {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
   }
 
-  input::placeholder, textarea::placeholder { color: var(--muted-light); }
-
-  .description, .landing-content p, .landing-label, .section-label,
-  .eyebrow, .card-label, .text-muted, .warning, .landing-footer,
-  .dashboard-footer, .floating-card span, .floating-card small { color: var(--muted); }
-
-  .login-button, .secondary-button, .outline-button {
-    background: var(--surface);
-    color: var(--text);
-    border-color: var(--border);
+  .dashboard-header {
+    background: rgba(26, 27, 24, 0.94) !important;
   }
 
-  .auth-message { background: var(--surface-soft); color: var(--text); }
-  .success-message { background: var(--success-soft); color: var(--success); }
+  input,
+  textarea,
+  select,
+  .auth-card input,
+  .profile-form input,
+  .profile-card input,
+  .profile-form textarea,
+  .profile-card textarea,
+  .profile-form select {
+    background: var(--surface-soft) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+  }
+
+  input::placeholder,
+  textarea::placeholder { color: var(--muted-light) !important; }
+
+  .login-button,
+  .secondary-button,
+  .outline-button {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+  }
+
+  .primary-button {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border-color: var(--black) !important;
+  }
+
+  .primary-button span { color: var(--lime) !important; }
+
+  .auth-message {
+    background: var(--surface-soft) !important;
+    color: var(--text) !important;
+  }
+
+  .success-message {
+    background: var(--success-soft) !important;
+    color: var(--success) !important;
+  }
+
+  .role-badge,
+  .profile-role {
+    background: var(--lime-soft) !important;
+    color: var(--lime) !important;
+  }
+
+  .landing-header,
+  .landing-footer,
+  .dashboard-footer {
+    border-color: var(--border) !important;
+  }
+
+  .landing-header {
+    background: var(--background);
+  }
+
+  .landing-footer span,
+  .dashboard-footer span,
+  .loading-logo,
+  .brand {
+    color: var(--text) !important;
+  }
+
+  .brand-mark,
+  .visual-circle {
+    background: var(--lime) !important;
+    color: #111111 !important;
+  }
+
+  .floating-card {
+    background: rgba(26, 27, 24, 0.96) !important;
+    border-color: var(--border) !important;
+  }
+
+  .loading-spinner {
+    border-color: var(--border) !important;
+    border-top-color: var(--lime) !important;
+  }
+
+  /* Navigation labels are readable in both active and inactive states. */
+  .main-nav button,
+  .profile-tabs button,
+  .coach-tabs button,
+  .athlete-profile-tabs button {
+    color: var(--muted) !important;
+  }
+
+  .main-nav button.active,
+  .main-nav button[aria-selected="true"],
+  .profile-tabs button.active,
+  .coach-tabs button.active,
+  .athlete-profile-tabs button.active {
+    color: var(--text) !important;
+  }
 }
 
 .main-nav, .profile-tabs, .coach-tabs, .athlete-profile-tabs {
