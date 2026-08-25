@@ -16,20 +16,16 @@ body {
   color: #111111;
 }
 
-/* Prevent iOS/Safari from changing native text/control colors when the
-   phone itself is in dark mode. These values deliberately match Season's
-   existing light design. */
 button,
 input,
 textarea,
 select,
 option {
   color-scheme: light !important;
+  forced-color-adjust: none;
 }
 
-button {
-  -webkit-text-fill-color: currentColor;
-}
+button { -webkit-text-fill-color: currentColor; }
 
 input,
 textarea,
@@ -51,11 +47,48 @@ option {
   background: #ffffff !important;
 }
 
-/* Explicitly keep ordinary text in the application's existing light
-   palette. Existing App.css rules for muted/secondary text still win where
-   they are more specific. */
-#root {
-  color: #111111;
+#root { color: #111111; }
+
+/* Landing page: these are intentionally locked to the existing light
+   palette, including the two lines mentioned by the user. */
+.landing-page,
+.landing-page .landing-content,
+.landing-page .landing-label,
+.landing-page h1,
+.landing-page h1 span,
+.landing-page p,
+.landing-page .landing-footer,
+.landing-page .landing-footer span,
+.landing-page .landing-footer p,
+.landing-page .brand,
+.landing-page .brand > span,
+.landing-page .floating-card,
+.landing-page .floating-card > span,
+.landing-page .floating-card strong,
+.landing-page .floating-card small {
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+}
+
+.landing-page .landing-label,
+.landing-page .landing-footer,
+.landing-page .floating-card > span,
+.landing-page .floating-card small {
+  color: #777770 !important;
+  -webkit-text-fill-color: #777770 !important;
+}
+
+.landing-page .brand-mark,
+.landing-page .visual-circle {
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+}
+
+/* Authenticated app: keep the same original light palette too. */
+.dashboard,
+.auth-page,
+.loading-screen {
+  color-scheme: light !important;
 }
 
 .main-nav,
@@ -80,9 +113,7 @@ option {
 img,
 svg,
 video,
-canvas {
-  max-width: 100%;
-}
+canvas { max-width: 100%; }
 
 @media (max-width: 650px) {
   .dashboard-header {
@@ -104,9 +135,7 @@ canvas {
     padding: 2px 0 4px;
   }
 
-  .main-nav::-webkit-scrollbar {
-    display: none;
-  }
+  .main-nav::-webkit-scrollbar { display: none; }
 
   .main-nav button {
     flex: 0 0 auto;
@@ -124,21 +153,13 @@ canvas {
   .dashboard-grid,
   .bottom-grid,
   .coach-overview-grid,
-  .competition-row {
-    min-width: 0;
-  }
+  .competition-row { min-width: 0; }
 
-  .competition-row > div {
-    min-width: 0 !important;
-    max-width: 100%;
-  }
-
+  .competition-row > div { min-width: 0 !important; max-width: 100%; }
   .competition-row h3,
   .competition-row p,
   .page-heading h1,
-  .welcome-section h1 {
-    overflow-wrap: anywhere;
-  }
+  .welcome-section h1 { overflow-wrap: anywhere; }
 
   .profile-tabs {
     display: flex;
@@ -149,14 +170,8 @@ canvas {
     scrollbar-width: none;
   }
 
-  .profile-tabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .profile-tabs button {
-    flex: 0 0 auto;
-    white-space: nowrap;
-  }
+  .profile-tabs::-webkit-scrollbar { display: none; }
+  .profile-tabs button { flex: 0 0 auto; white-space: nowrap; }
 
   .primary-button,
   .secondary-button,
@@ -170,13 +185,7 @@ canvas {
 }
 
 @media (max-width: 420px) {
-  .main-nav button {
-    padding: 8px 9px;
-    font-size: 11px;
-  }
-
+  .main-nav button { padding: 8px 9px; font-size: 11px; }
   .page-heading h1,
-  .welcome-section h1 {
-    font-size: 34px;
-  }
+  .welcome-section h1 { font-size: 34px; }
 }
