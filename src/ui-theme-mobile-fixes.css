@@ -78,6 +78,13 @@ option {
   -webkit-text-fill-color: #777770 !important;
 }
 
+/* Restore the original accent color of "Un ressenti." while keeping it
+   protected from automatic dark-mode recoloring. */
+.landing-page h1 span {
+  color: #789e24 !important;
+  -webkit-text-fill-color: #789e24 !important;
+}
+
 .landing-page .brand-mark,
 .landing-page .visual-circle {
   color: #111111 !important;
