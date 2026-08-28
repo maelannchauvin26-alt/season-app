@@ -49,13 +49,11 @@ option {
 
 #root { color: #111111; }
 
-/* Landing page: these are intentionally locked to the existing light
-   palette, including the two lines mentioned by the user. */
+/* Landing page: keep the original light palette. */
 .landing-page,
 .landing-page .landing-content,
 .landing-page .landing-label,
 .landing-page h1,
-.landing-page h1 span,
 .landing-page p,
 .landing-page .landing-footer,
 .landing-page .landing-footer span,
@@ -70,19 +68,19 @@ option {
   -webkit-text-fill-color: #111111 !important;
 }
 
+/* Restore the original accent color of "Un ressenti." while keeping it
+   protected from automatic dark-mode recoloring. */
+.landing-page h1 span {
+  color: #789e24 !important;
+  -webkit-text-fill-color: #789e24 !important;
+}
+
 .landing-page .landing-label,
 .landing-page .landing-footer,
 .landing-page .floating-card > span,
 .landing-page .floating-card small {
   color: #777770 !important;
   -webkit-text-fill-color: #777770 !important;
-}
-
-/* Restore the original accent color of "Un ressenti." while keeping it
-   protected from automatic dark-mode recoloring. */
-.landing-page h1 span {
-  color: #789e24 !important;
-  -webkit-text-fill-color: #789e24 !important;
 }
 
 .landing-page .brand-mark,
