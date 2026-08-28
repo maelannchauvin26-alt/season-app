@@ -149,6 +149,49 @@ canvas { max-width: 100%; }
     font-size: 12px;
   }
 
+  /* Coach navigation is rendered with an inline 5-column grid in App.jsx.
+     On phones, switch only the mobile layout to a horizontal scroller so
+     every label stays intact and every tab remains easy to tap. */
+  .dashboard-main nav[aria-label="Navigation entraîneur"] {
+    display: flex !important;
+    grid-template-columns: none !important;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px !important;
+    padding: 5px !important;
+    margin-bottom: 22px !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .dashboard-main nav[aria-label="Navigation entraîneur"]::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dashboard-main nav[aria-label="Navigation entraîneur"] > button {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: max-content;
+    max-width: none;
+    min-height: 44px;
+    padding: 10px 13px !important;
+    white-space: nowrap !important;
+    overflow: visible;
+    word-break: normal;
+    overflow-wrap: normal;
+    line-height: 1.2;
+    font-size: 13px;
+  }
+
+  .dashboard-main nav[aria-label="Navigation entraîneur"] > button > span {
+    display: inline-block;
+    margin-right: 5px !important;
+  }
+
   .page-heading,
   .section-heading,
   .competition-card-header,
@@ -193,4 +236,10 @@ canvas { max-width: 100%; }
   .main-nav button { padding: 8px 9px; font-size: 11px; }
   .page-heading h1,
   .welcome-section h1 { font-size: 34px; }
+
+  .dashboard-main nav[aria-label="Navigation entraîneur"] > button {
+    min-height: 42px;
+    padding: 9px 11px !important;
+    font-size: 12px;
+  }
 }
