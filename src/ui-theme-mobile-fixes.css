@@ -68,19 +68,19 @@ option {
   -webkit-text-fill-color: #111111 !important;
 }
 
-/* Restore the original accent color of "Un ressenti." while keeping it
-   protected from automatic dark-mode recoloring. */
-.landing-page h1 span {
-  color: #789e24 !important;
-  -webkit-text-fill-color: #789e24 !important;
-}
-
 .landing-page .landing-label,
 .landing-page .landing-footer,
 .landing-page .floating-card > span,
 .landing-page .floating-card small {
   color: #777770 !important;
   -webkit-text-fill-color: #777770 !important;
+}
+
+/* Original App.css uses var(--lime-dark) for "Un ressenti.".
+   Keep that exact source color while blocking dark-mode recoloring. */
+.landing-page h1 span {
+  color: var(--lime-dark) !important;
+  -webkit-text-fill-color: var(--lime-dark) !important;
 }
 
 .landing-page .brand-mark,
@@ -149,9 +149,6 @@ canvas { max-width: 100%; }
     font-size: 12px;
   }
 
-  /* Coach navigation is rendered with an inline 5-column grid in App.jsx.
-     On phones, switch only the mobile layout to a horizontal scroller so
-     every label stays intact and every tab remains easy to tap. */
   .dashboard-main nav[aria-label="Navigation entraîneur"] {
     display: flex !important;
     grid-template-columns: none !important;
