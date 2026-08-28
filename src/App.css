@@ -3194,3 +3194,31 @@ select {
     font-size: 14px;
   }
 }
+
+
+/* =====================================================
+   SEASON — TOUJOURS EN MODE CLAIR
+   ===================================================== */
+
+.landing-page,
+.landing-page h1,
+.landing-page h1 span,
+.landing-page .landing-content > p,
+.landing-page .landing-label,
+.landing-page .landing-footer,
+.landing-page .landing-footer span,
+.landing-page .landing-footer p {
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+}
+
+.landing-page .floating-card strong {
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+}
+
+.landing-page .floating-card span,
+.landing-page .floating-card small {
+  color: #777770 !important;
+  -webkit-text-fill-color: #777770 !important;
+}
