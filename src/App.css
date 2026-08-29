@@ -3225,3 +3225,7 @@ select {
   color: #789e24 !important;
   -webkit-text-fill-color: #789e24 !important;
 }
+.landing-page .brand-mark {
+  color: var(--lime) !important;
+  -webkit-text-fill-color: var(--lime) !important;
+}
