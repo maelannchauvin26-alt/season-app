@@ -2910,7 +2910,7 @@ if (objectivesError) {
                   <div className="card-header">
                     <div>
                       <span className="card-label">AUJOURD'HUI</span>
-                      <h2>Comment tu te sens ?</h2>
+                      <h2 className="feeling-card-title">Comment tu te sens ?</h2>
                     </div>
                     <div className="card-icon">✦</div>
                   </div>

@@ -3229,3 +3229,6 @@ select {
   color: var(--lime) !important;
   -webkit-text-fill-color: var(--lime) !important;
 }
+.feeling-card-title {
+  color: var(--lime-dark);
+}
