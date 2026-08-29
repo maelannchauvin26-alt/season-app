@@ -55,7 +55,6 @@ option {
 .landing-page .landing-content,
 .landing-page .landing-label,
 .landing-page h1,
-.landing-page h1 span,
 .landing-page p,
 .landing-page .landing-footer,
 .landing-page .landing-footer span,
@@ -188,4 +187,8 @@ canvas { max-width: 100%; }
   .main-nav button { padding: 8px 9px; font-size: 11px; }
   .page-heading h1,
   .welcome-section h1 { font-size: 34px; }
+}
+.landing-page .landing-accent {
+  color: var(--lime-dark) !important;
+  -webkit-text-fill-color: var(--lime-dark) !important;
 }

@@ -3202,7 +3202,6 @@ select {
 
 .landing-page,
 .landing-page h1,
-.landing-page h1 span,
 .landing-page .landing-content > p,
 .landing-page .landing-label,
 .landing-page .landing-footer,
@@ -3221,4 +3220,8 @@ select {
 .landing-page .floating-card small {
   color: #777770 !important;
   -webkit-text-fill-color: #777770 !important;
+}
+.landing-page .landing-accent {
+  color: #789e24 !important;
+  -webkit-text-fill-color: #789e24 !important;
 }
