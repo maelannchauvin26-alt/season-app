@@ -3240,3 +3240,20 @@ select {
     width: 100%;
   }
 }
+@media (max-width: 600px) {
+  .competition-list > div > button:first-child {
+    min-width: 0;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .competition-list > div > button:first-child .big-avatar {
+    flex-shrink: 0;
+  }
+
+  .competition-list > div > button:first-child > span:last-child {
+    flex-shrink: 0;
+    font-size: 22px !important;
+    margin-left: 4px;
+  }
+}
