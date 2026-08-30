@@ -2744,10 +2744,10 @@ if (objectivesError) {
     return (
       <div className="auth-page">
         <div className="auth-card">
-          <div className="auth-logo">SEASON</div>
+          <div className="auth-logo" translate="no">SEASON</div>
           <div className="empty-state">
             <div className="loading-spinner" />
-            <p>Chargement de Season...</p>
+            <p>Chargement de <span translate="no">Season</span>...</p>
           </div>
         </div>
       </div>
@@ -2781,7 +2781,7 @@ if (objectivesError) {
   {/* Logo */}
   <div className="brand">
     <div className="brand-mark">S</div>
-    <span>SEASON</span>
+    <span translate="no">SEASON</span>
   </div>
 
   {/* Profil athlète en haut à droite */}
@@ -3758,7 +3758,7 @@ if (objectivesError) {
           )}
         </main>
 
-        <footer className="dashboard-footer"><span>SEASON</span><p>Une saison. Un ressenti. Un projet commun.</p></footer>
+        <footer className="dashboard-footer"><span translate="no">SEASON</span><p>Une saison. Un ressenti. Un projet commun.</p></footer>
       </div>
     );
   }
@@ -3774,7 +3774,7 @@ if (objectivesError) {
         <header className="dashboard-header">
           <div className="brand">
             <div className="brand-mark">S</div>
-            <span>SEASON</span>
+            <span translate="no">SEASON</span>
           </div>
 
           <div className="header-profile">
@@ -3873,7 +3873,7 @@ if (objectivesError) {
       <h3>Aucun objectif renseigné</h3>
 
       <p>
-        Cet athlète n'a pas encore défini ses objectifs dans Season.
+        Cet athlète n'a pas encore défini ses objectifs dans <span translate="no">Season</span>.
       </p>
     </div>
   ) : (
@@ -4492,7 +4492,7 @@ if (objectivesError) {
         </main>
 
         <footer className="dashboard-footer">
-          <span>SEASON</span>
+          <span translate="no">SEASON</span>
           <p>
             Une saison. Un ressenti. Un projet commun.
           </p>
@@ -4513,8 +4513,8 @@ if (objectivesError) {
   }}
 >
   <div className="brand">
-    <div className="brand-mark">S</div>
-    <span>SEASON</span>
+    <div className="brand-mark" translate="no">S</div>
+    <span translate="no">SEASON</span>
   </div>
 
   <div
@@ -4562,11 +4562,11 @@ if (objectivesError) {
   🗑️ Supprimer
 </button></div></div>)}</div>}</div></section>}
 
-          {coachTab === "connections" && <section className="season-list"><div className="section-heading"><div><span className="card-label">CONNEXION</span><h2>Inviter un athlète</h2></div></div><div className="profile-form"><p>Génère un code et donne-le à ton athlète. Il pourra le saisir depuis son espace Season.</p>{coachInvitationCode ? <div style={{ marginTop: "20px", padding: "25px", borderRadius: "18px", background: "rgba(0,0,0,0.04)", textAlign: "center" }}><span className="card-label">TON CODE D'INVITATION</span><div style={{ fontSize: "36px", fontWeight: 800, letterSpacing: "6px", margin: "15px 0" }}>{coachInvitationCode}</div><div style={{ display: "flex", justifyContent: "center", gap: "10px", flexWrap: "wrap" }}><button type="button" className="primary-button" onClick={copyInvitationCode}>📋 Copier le code</button><button type="button" className="outline-button" onClick={generateCoachInvitationCode} disabled={loadingInvitationCode}>+ Nouveau code</button></div><p style={{ marginTop: "15px", fontSize: "14px", opacity: 0.65 }}>Un code devient inutilisable lorsqu'un athlète l'utilise.</p></div> : <button type="button" className="large-submit" onClick={generateCoachInvitationCode} disabled={loadingInvitationCode}>{loadingInvitationCode ? "Génération..." : "Générer mon code d'invitation →"}</button>}{invitationMessage && <div className={invitationMessage.startsWith("Erreur") ? "auth-message" : "success-message"}>{invitationMessage}</div>}</div></section>}
+          {coachTab === "connections" && <section className="season-list"><div className="section-heading"><div><span className="card-label">CONNEXION</span><h2>Inviter un athlète</h2></div></div><div className="profile-form"><p>Génère un code et donne-le à ton athlète. Il pourra le saisir depuis son espace <span translate="no">Season</span>.</p>{coachInvitationCode ? <div style={{ marginTop: "20px", padding: "25px", borderRadius: "18px", background: "rgba(0,0,0,0.04)", textAlign: "center" }}><span className="card-label">TON CODE D'INVITATION</span><div style={{ fontSize: "36px", fontWeight: 800, letterSpacing: "6px", margin: "15px 0" }}>{coachInvitationCode}</div><div style={{ display: "flex", justifyContent: "center", gap: "10px", flexWrap: "wrap" }}><button type="button" className="primary-button" onClick={copyInvitationCode}>📋 Copier le code</button><button type="button" className="outline-button" onClick={generateCoachInvitationCode} disabled={loadingInvitationCode}>+ Nouveau code</button></div><p style={{ marginTop: "15px", fontSize: "14px", opacity: 0.65 }}>Un code devient inutilisable lorsqu'un athlète l'utilise.</p></div> : <button type="button" className="large-submit" onClick={generateCoachInvitationCode} disabled={loadingInvitationCode}>{loadingInvitationCode ? "Génération..." : "Générer mon code d'invitation →"}</button>}{invitationMessage && <div className={invitationMessage.startsWith("Erreur") ? "auth-message" : "success-message"}>{invitationMessage}</div>}</div></section>}
 
           {coachTab === "profile" && <section className="page-section"><div className="page-heading"><div><span className="section-label">MON PROFIL</span><h1>Ton identité d'entraîneur.</h1><p>Ton prénom et ton nom sont affichés à tes athlètes.</p></div></div><div className="profile-layout"><div className="profile-identity"><div className="big-avatar">{((coachFirstName?.[0] || "E") + (coachLastName?.[0] || "")).toUpperCase()}</div><h2>{`${coachFirstName || ""} ${coachLastName || ""}`.trim() || "Ton nom"}</h2><p>Entraîneur</p><span className="profile-role">COACH</span></div><form className="profile-form" onSubmit={saveCoachProfile}><div className="form-row"><div><label>Prénom</label><input value={coachFirstName} onChange={(e) => setCoachFirstName(e.target.value)} placeholder="Prénom" /></div><div><label>Nom</label><input value={coachLastName} onChange={(e) => setCoachLastName(e.target.value)} placeholder="Nom" /></div></div>{coachProfileMessage && <div className={coachProfileMessage.startsWith("Erreur") ? "auth-message" : "success-message"}>{coachProfileMessage}</div>}<button className="large-submit" type="submit" disabled={savingCoachProfile}>{savingCoachProfile ? "Enregistrement..." : "Enregistrer mon identité"}</button></form></div><div className="season-list" style={{ marginTop: "24px" }}><div className="section-heading"><div><span className="card-label">COMPTE</span><h2>Gérer ton compte</h2></div></div><p>Connecté avec {profile?.email || user?.email || "ton adresse e-mail"}.</p><button type="button" className="outline-button" onClick={logout}>Se déconnecter</button><div style={{ marginTop: "32px", paddingTop: "24px", borderTop: "1px solid rgba(0,0,0,0.1)" }}><span className="card-label">ZONE DANGEREUSE</span><p>La suppression du compte est définitive. Une confirmation renforcée sera demandée.</p><button type="button" className="logout-button" onClick={deleteAccount} disabled={deletingAccount}>{deletingAccount ? "Suppression..." : "Supprimer mon compte"}</button></div></div></section>}
         </main>
-        <footer className="dashboard-footer"><span>SEASON</span><p>Une saison. Un ressenti. Un projet commun.</p></footer>
+        <footer className="dashboard-footer"><span translate="no">SEASON</span><p>Une saison. Un ressenti. Un projet commun.</p></footer>
       </div>
     );
   }
@@ -4578,8 +4578,8 @@ if (objectivesError) {
   if (mode === "home") {
     return (
       <div className="landing-page">
-        <header className="landing-header"><div className="brand"><div className="brand-mark">S</div><span>SEASON</span></div><button type="button" className="login-button" onClick={() => { setMode("login"); setMessage(""); }}>Se connecter</button></header>
-        <main className="landing-hero"><div className="landing-content"><span className="landing-label">L'ESPACE QUI DONNE UNE VOIX À TA SAISON</span><h1>Une saison.<br /><span className="landing-accent">Un ressenti.</span><br />Un projet commun.</h1><p>Season permet aux athlètes et aux entraîneurs de mieux communiquer, suivre les ressentis et construire ensemble une saison sportive.</p><div className="landing-buttons"><button type="button" className="primary-button" onClick={() => chooseRole("athlete")}>Je suis athlète <span>→</span></button><button type="button" className="secondary-button" onClick={() => chooseRole("coach")}>Je suis entraîneur</button></div></div><div className="landing-visual"><div className="floating-card card-one"><span>AUJOURD'HUI</span><strong>Comment tu te sens ?</strong><div className="emoji-row"><span>😄</span><span>🙂</span><span>😐</span><span>😕</span></div></div><div className="floating-card card-two"><span>SAISON 2026</span><strong>800 m</strong><small>Ton projet. Ton rythme.</small></div><div className="visual-circle"><span>S</span></div></div></main><footer className="landing-footer"><span>SEASON</span><p>Une saison. Un ressenti. Un projet commun.</p></footer>
+        <header className="landing-header"><div className="brand"><div className="brand-mark" translate="no">S</div><span translate="no">SEASON</span></div><button type="button" className="login-button" onClick={() => { setMode("login"); setMessage(""); }}>Se connecter</button></header>
+        <main className="landing-hero"><div className="landing-content"><span className="landing-label">L'ESPACE QUI DONNE UNE VOIX À TA SAISON</span><h1>Une saison.<br /><span className="landing-accent">Un ressenti.</span><br />Un projet commun.</h1><p><span translate="no">Season</span> permet aux athlètes et aux entraîneurs de mieux communiquer, suivre les ressentis et construire ensemble une saison sportive.</p><div className="landing-buttons"><button type="button" className="primary-button" onClick={() => chooseRole("athlete")}>Je suis athlète <span>→</span></button><button type="button" className="secondary-button" onClick={() => chooseRole("coach")}>Je suis entraîneur</button></div></div><div className="landing-visual"><div className="floating-card card-one"><span>AUJOURD'HUI</span><strong>Comment tu te sens ?</strong><div className="emoji-row"><span>😄</span><span>🙂</span><span>😐</span><span>😕</span></div></div><div className="floating-card card-two"><span>SAISON 2026</span><strong>800 m</strong><small>Ton projet. Ton rythme.</small></div><div className="visual-circle"><span>S</span></div></div></main><footer className="landing-footer"><span>SEASON</span><p>Une saison. Un ressenti. Un projet commun.</p></footer>
       </div>
     );
   }
@@ -4590,18 +4590,18 @@ if (objectivesError) {
 
   if (mode === "forgot") {
     return (
-      <div className="auth-page"><div className="auth-card"><button type="button" className="back-button" onClick={() => { setMode("login"); setResetMessage(""); }}>← Retour à la connexion</button><div className="auth-logo">SEASON</div><p className="eyebrow">RÉCUPÉRATION DU COMPTE</p><h1>Mot de passe oublié ?</h1><p>Entre ton adresse e-mail et Season t'enverra un lien pour choisir un nouveau mot de passe.</p><form onSubmit={sendPasswordReset}><label>Adresse e-mail</label><input type="email" value={resetEmail || email} onChange={(e) => { setResetEmail(e.target.value); setEmail(e.target.value); }} placeholder="ton@email.com" required /><button className="primary-button auth-submit" type="submit" disabled={resetLoading}>{resetLoading ? "Envoi..." : "Envoyer le lien →"}</button></form>{resetMessage && <div className={resetMessage.startsWith("Erreur") ? "auth-message" : "success-message"}>{resetMessage}</div>}<div className="auth-switch">Tu te souviens de ton mot de passe ? <button type="button" onClick={() => { setMode("login"); setResetMessage(""); }}>Se connecter</button></div></div></div>
+      <div className="auth-page"><div className="auth-card"><button type="button" className="back-button" onClick={() => { setMode("login"); setResetMessage(""); }}>← Retour à la connexion</button><div className="auth-logo" translate="no">SEASON</div><p className="eyebrow">RÉCUPÉRATION DU COMPTE</p><h1>Mot de passe oublié ?</h1><p>Entre ton adresse e-mail et <span translate="no">Season</span> t'enverra un lien pour choisir un nouveau mot de passe.</p><form onSubmit={sendPasswordReset}><label>Adresse e-mail</label><input type="email" value={resetEmail || email} onChange={(e) => { setResetEmail(e.target.value); setEmail(e.target.value); }} placeholder="ton@email.com" required /><button className="primary-button auth-submit" type="submit" disabled={resetLoading}>{resetLoading ? "Envoi..." : "Envoyer le lien →"}</button></form>{resetMessage && <div className={resetMessage.startsWith("Erreur") ? "auth-message" : "success-message"}>{resetMessage}</div>}<div className="auth-switch">Tu te souviens de ton mot de passe ? <button type="button" onClick={() => { setMode("login"); setResetMessage(""); }}>Se connecter</button></div></div></div>
     );
   }
 
   if (mode === "reset-password") {
     return (
-      <div className="auth-page"><div className="auth-card"><div className="auth-logo">SEASON</div><p className="eyebrow">NOUVEAU MOT DE PASSE</p><h1>Choisis ton nouveau mot de passe.</h1><form onSubmit={updatePassword}><label>Nouveau mot de passe</label><input type="password" minLength={6} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Au moins 6 caractères" required /><label>Confirmer le mot de passe</label><input type="password" minLength={6} value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} placeholder="Répète ton mot de passe" required /><button className="primary-button auth-submit" type="submit" disabled={resetLoading}>{resetLoading ? "Modification..." : "Modifier mon mot de passe →"}</button></form>{resetMessage && <div className={resetMessage.startsWith("Erreur") ? "auth-message" : "success-message"}>{resetMessage}</div>}</div></div>
+      <div className="auth-page"><div className="auth-card"><div className="auth-logo" translate="no">SEASON</div><p className="eyebrow">NOUVEAU MOT DE PASSE</p><h1>Choisis ton nouveau mot de passe.</h1><form onSubmit={updatePassword}><label>Nouveau mot de passe</label><input type="password" minLength={6} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Au moins 6 caractères" required /><label>Confirmer le mot de passe</label><input type="password" minLength={6} value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} placeholder="Répète ton mot de passe" required /><button className="primary-button auth-submit" type="submit" disabled={resetLoading}>{resetLoading ? "Modification..." : "Modifier mon mot de passe →"}</button></form>{resetMessage && <div className={resetMessage.startsWith("Erreur") ? "auth-message" : "success-message"}>{resetMessage}</div>}</div></div>
     );
   }
 
   return (
-    <div className="auth-page"><div className="auth-card"><button type="button" className="back-button" onClick={backHome}>← Retour</button><div className="auth-logo">SEASON</div><p className="eyebrow">{mode === "signup" ? "CRÉER UN COMPTE" : "BIENVENUE"}</p><h1>{mode === "signup" ? "Créer ton compte." : "Content de te revoir."}</h1>{mode === "signup" && role && <div className="role-badge">{role === "athlete" ? "Compte Athlète" : "Compte Entraîneur"}</div>}<form onSubmit={handleAuth}>
+    <div className="auth-page"><div className="auth-card"><button type="button" className="back-button" onClick={backHome}>← Retour</button><div className="auth-logo" translate="no">SEASON</div><p className="eyebrow">{mode === "signup" ? "CRÉER UN COMPTE" : "BIENVENUE"}</p><h1>{mode === "signup" ? "Créer ton compte." : "Content de te revoir."}</h1>{mode === "signup" && role && <div className="role-badge">{role === "athlete" ? "Compte Athlète" : "Compte Entraîneur"}</div>}<form onSubmit={handleAuth}>
   {mode === "signup" && role === "coach" && (
     <>
       <label>Prénom</label>
