@@ -3234,3 +3234,11 @@ select {
 .feeling-card-title {
   color: var(--lime-dark);
 }
+@media (max-width: 600px) {
+  .profile-form input[type="date"] {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
