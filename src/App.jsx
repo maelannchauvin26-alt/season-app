@@ -2985,8 +2985,6 @@ if (objectivesError) {
 
               <div className="season-overview">
                 <div className="overview-card"><span>COMPÉTITIONS</span><strong>{competitions.length}</strong><p>enregistrée{competitions.length > 1 ? "s" : ""}</p></div>
-                <div className="overview-card"><span>DISCIPLINE</span><strong>{athleteData.main_event || "—"}</strong><p>{athleteData.main_sport || "Sport non renseigné"}</p></div>
-                <div className="overview-card"><span>CLUB</span><strong>{athleteData.club || "—"}</strong><p>Mon environnement sportif</p></div>
               </div>
 
               {showCompetitionForm && (
