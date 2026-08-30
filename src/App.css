@@ -478,6 +478,7 @@ select {
 .profile-card textarea,
 .profile-form select {
   width: 100%;
+  box-sizing: border-box;
   border: 1px solid #deded8;
   background: #fafaf8;
   border-radius: 12px;
