@@ -1433,6 +1433,7 @@ select {
 }
 
 .form-row {
+  min-width: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
