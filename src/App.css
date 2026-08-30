@@ -3242,6 +3242,13 @@ select {
 }
 @media (max-width: 600px) {
   .competition-list > div > button:first-child {
+    display: grid !important;
+    grid-template-columns: 46px minmax(0, 1fr) 24px;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+    padding: 16px;
     overflow: hidden;
   }
 
@@ -3252,16 +3259,18 @@ select {
 
   .competition-list > div > button:first-child > div:nth-child(2) h3,
   .competition-list > div > button:first-child > div:nth-child(2) p {
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .competition-list > div > button:first-child > span:last-child {
-    position: static;
-    flex: 0 0 auto;
+    position: static !important;
     width: 24px;
+    min-width: 24px;
+    margin: 0;
+    flex: none;
     text-align: center;
-    margin-left: 8px;
   }
 }
