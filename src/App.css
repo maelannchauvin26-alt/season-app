@@ -3242,18 +3242,26 @@ select {
 }
 @media (max-width: 600px) {
   .competition-list > div > button:first-child {
-    min-width: 0;
-    padding: 16px;
-    gap: 12px;
+    overflow: hidden;
   }
 
-  .competition-list > div > button:first-child .big-avatar {
-    flex-shrink: 0;
+  .competition-list > div > button:first-child > div:nth-child(2) {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .competition-list > div > button:first-child > div:nth-child(2) h3,
+  .competition-list > div > button:first-child > div:nth-child(2) p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .competition-list > div > button:first-child > span:last-child {
-    flex-shrink: 0;
-    font-size: 22px !important;
-    margin-left: 4px;
+    position: static;
+    flex: 0 0 auto;
+    width: 24px;
+    text-align: center;
+    margin-left: 8px;
   }
 }
