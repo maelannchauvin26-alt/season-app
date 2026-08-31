@@ -3286,3 +3286,22 @@ select {
   text-overflow: ellipsis;
 }
 }
+@media (max-width: 600px) {
+  .season-list > div[style*="grid-template-columns: auto minmax(0,1fr) auto"] {
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .season-list > div[style*="grid-template-columns: auto minmax(0,1fr) auto"] > div:last-child {
+    grid-column: 2;
+    width: 100%;
+    display: flex !important;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .season-list > div[style*="grid-template-columns: auto minmax(0,1fr) auto"] > div:nth-child(2) {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
