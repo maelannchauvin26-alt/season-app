@@ -705,6 +705,9 @@ const saveCoachObjectiveFeedback = async () => {
       setNewCoachQuestionType("text");
       await loadCoachQuestions(user.id);
       setCoachQuestionMessage("Question ajoutée. Elle apparaîtra dans les bilans de compétition.");
+      setTimeout(() => {
+        setCoachQuestionMessage("");
+      }, 3000);
     } catch (error) {
       console.error("Erreur ajout question :", error);
       setCoachQuestionMessage(`Erreur : ${error?.message || "Impossible d'ajouter la question."}`);
