@@ -16,6 +16,44 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
+  const showMessage = (setter, text) => {
+  setter(text);
+
+  setTimeout(() => {
+    setter("");
+  }, 3000);
+};
+
+  const getFrenchErrorMessage = (error, fallback = "Une erreur est survenue.") => {
+  const message = error?.message || "";
+
+  if (message === "Invalid login credentials") {
+    return "Adresse e-mail ou mot de passe incorrect.";
+  }
+
+  if (message.includes("Email not confirmed")) {
+    return "Ton adresse e-mail n'a pas encore été confirmée.";
+  }
+
+  if (message.includes("User already registered")) {
+    return "Un compte existe déjà avec cette adresse e-mail.";
+  }
+
+  if (message.includes("Password should be at least")) {
+    return "Ton mot de passe doit contenir au moins 6 caractères.";
+  }
+
+  if (message.includes("rate limit")) {
+    return "Trop de tentatives. Réessaie dans quelques instants.";
+  }
+
+  if (message.includes("network")) {
+    return "Problème de connexion. Vérifie ta connexion Internet.";
+  }
+
+  return fallback;
+};
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [resetEmail, setResetEmail] = useState("");
@@ -627,7 +665,10 @@ const saveCoachObjectiveFeedback = async () => {
     const last = coachLastName.trim();
 
     if (!first || !last) {
-      setCoachProfileMessage("Merci de renseigner ton prénom et ton nom.");
+      showMessage(
+  setCoachProfileMessage,
+  "Merci de renseigner ton prénom et ton nom."
+);
       return;
     }
 
@@ -646,10 +687,13 @@ const saveCoachObjectiveFeedback = async () => {
       setProfile(data);
       setCoachFirstName(data.first_name || first);
       setCoachLastName(data.last_name || last);
-      setCoachProfileMessage("Identité enregistrée.");
+      showMessage(setCoachProfileMessage, "Identité enregistrée.");
     } catch (error) {
       console.error(error);
-      setCoachProfileMessage(`Erreur : ${error?.message || "Impossible d'enregistrer ton identité."}`);
+      showMessage(
+  setCoachProfileMessage,
+  `Erreur : ${error?.message || "Impossible d'enregistrer ton identité."}`
+);
     } finally {
       setSavingCoachProfile(false);
     }
@@ -670,7 +714,10 @@ const saveCoachObjectiveFeedback = async () => {
       setCoachQuestions(data || []);
     } catch (error) {
       console.error("Erreur chargement questions :", error);
-      setCoachQuestionMessage(`Erreur : ${error?.message || "Impossible de charger les questions."}`);
+      showMessage(
+  setCoachQuestionMessage,
+  `Erreur : ${error?.message || "Impossible de charger les questions."}`
+);
     } finally {
       setLoadingCoachQuestions(false);
     }
@@ -681,7 +728,10 @@ const saveCoachObjectiveFeedback = async () => {
     if (!user) return;
     const question = newCoachQuestion.trim();
     if (!question) {
-      setCoachQuestionMessage("Écris une question avant de l'ajouter.");
+      showMessage(
+  setCoachQuestionMessage,
+  "Écris une question avant de l'ajouter."
+);
       return;
     }
     setSavingCoachQuestion(true);
@@ -728,7 +778,10 @@ const saveCoachObjectiveFeedback = async () => {
       await loadCoachQuestions(user.id);
     } catch (error) {
       console.error(error);
-      setCoachQuestionMessage(`Erreur : ${error?.message || "Impossible de modifier la question."}`);
+      showMessage(
+  setCoachQuestionMessage,
+  `Erreur : ${error?.message || "Impossible de modifier la question."}`
+);
     }
   }
 
@@ -745,7 +798,10 @@ const saveCoachObjectiveFeedback = async () => {
       await loadCoachQuestions(user.id);
     } catch (error) {
       console.error(error);
-      setCoachQuestionMessage(`Erreur : ${error?.message || "Impossible de supprimer la question."}`);
+      showMessage(
+  setCoachQuestionMessage,
+  `Erreur : ${error?.message || "Impossible de supprimer la question."}`
+);
     }
   }
 
@@ -949,10 +1005,10 @@ const saveCoachObjectiveFeedback = async () => {
     } catch (error) {
       console.error(error);
 
-      setMessage(
-        error?.message ||
-          "Une erreur est survenue."
-      );
+      showMessage(
+  setMessage,
+  getFrenchErrorMessage(error)
+);
     } finally {
       setLoading(false);
     }
@@ -963,7 +1019,10 @@ const saveCoachObjectiveFeedback = async () => {
     const targetEmail = resetEmail.trim() || email.trim();
 
     if (!targetEmail) {
-      setResetMessage("Renseigne ton adresse e-mail pour recevoir le lien de réinitialisation.");
+      showMessage(
+  setResetMessage,
+  "Renseigne ton adresse e-mail pour recevoir le lien de réinitialisation."
+);
       return;
     }
 
@@ -977,10 +1036,19 @@ const saveCoachObjectiveFeedback = async () => {
       });
       if (error) throw error;
 
-      setResetMessage("Si cette adresse correspond à un compte Season, un e-mail de réinitialisation vient d'être envoyé. Pense aussi à vérifier les spams.");
+      showMessage(
+  setResetMessage,
+  "Si cette adresse correspond à un compte Season, un e-mail de réinitialisation vient d'être envoyé. Pense aussi à vérifier les spams."
+);
     } catch (error) {
       console.error(error);
-      setResetMessage(`Erreur : ${error?.message || "Impossible d'envoyer l'e-mail de réinitialisation."}`);
+      showMessage(
+  setResetMessage,
+  `Erreur : ${getFrenchErrorMessage(
+    error,
+    "Impossible d'envoyer l'e-mail de réinitialisation."
+  )}`
+);
     } finally {
       setResetLoading(false);
     }
@@ -990,12 +1058,18 @@ const saveCoachObjectiveFeedback = async () => {
     event.preventDefault();
 
     if (newPassword.length < 6) {
-      setResetMessage("Ton nouveau mot de passe doit contenir au moins 6 caractères.");
+      showMessage(
+  setResetMessage,
+  "Ton nouveau mot de passe doit contenir au moins 6 caractères."
+);
       return;
     }
 
     if (newPassword !== confirmNewPassword) {
-      setResetMessage("Les deux mots de passe ne correspondent pas.");
+      showMessage(
+  setResetMessage,
+  "Les deux mots de passe ne correspondent pas."
+);
       return;
     }
 
@@ -1008,17 +1082,26 @@ const saveCoachObjectiveFeedback = async () => {
 
       setNewPassword("");
       setConfirmNewPassword("");
-      setResetMessage("Ton mot de passe a été modifié. Tu peux maintenant te connecter avec ton nouveau mot de passe.");
+      showMessage(
+  setResetMessage,
+  "Ton mot de passe a été modifié. Tu peux maintenant te connecter avec ton nouveau mot de passe."
+);
       setTimeout(async () => {
         await supabase.auth.signOut();
         setUser(null);
         setProfile(null);
         setRole(null);
         setMode("login");
-      }, 900);
+      }, 3000);
     } catch (error) {
       console.error(error);
-      setResetMessage(`Erreur : ${error?.message || "Impossible de modifier le mot de passe."}`);
+      showMessage(
+  setResetMessage,
+  `Erreur : ${getFrenchErrorMessage(
+    error,
+    "Impossible de modifier le mot de passe."
+  )}`
+);
     } finally {
       setResetLoading(false);
     }
