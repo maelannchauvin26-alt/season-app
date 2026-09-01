@@ -3304,17 +3304,17 @@ select {
     min-width: 0;
   }
 }
-.coach-connection-section .profile-form > p {
-  margin-bottom: 28px;
+.coach-connection-intro {
+  margin: 0 0 30px !important;
   line-height: 1.6;
 }
 
-.coach-connection-section .profile-form > .large-submit {
-  margin-top: 8px;
+.coach-connection-button {
+  margin-top: 0 !important;
 }
 
 @media (max-width: 600px) {
-  .coach-connection-section .profile-form > p {
-    margin-bottom: 24px;
+  .coach-connection-intro {
+    margin-bottom: 26px !important;
   }
 }
