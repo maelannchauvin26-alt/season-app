@@ -3304,3 +3304,17 @@ select {
     min-width: 0;
   }
 }
+.coach-connection-section .profile-form > p {
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.coach-connection-section .profile-form > .large-submit {
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .coach-connection-section .profile-form > p {
+    margin-bottom: 24px;
+  }
+}
